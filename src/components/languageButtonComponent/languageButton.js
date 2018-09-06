@@ -106,6 +106,7 @@ export default withRouter(connect(
             fetchAllAlbums();
             fetchMainVideos();
             fetchAllVideos();
+            fetchNewRelease();
             ['ru', 'en', 'kz'].map(lang => {
                 fetchAllGroupArtists(lang);
                 fetchAllArtists(lang);
@@ -117,7 +118,6 @@ export default withRouter(connect(
                 fetchMainProjects(lang);
                 fetchProjects(lang);
                 fetchAllProjects(lang);
-                fetchNewRelease(lang);
             });
         },
     })

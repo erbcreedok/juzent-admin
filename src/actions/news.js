@@ -258,7 +258,7 @@ export const getProjectArticle = (id, lang) => dispatch => {
 export const getNewRelease = () => dispatch => {
     dispatch({ type: 'FETCH_RELEASE', payload: 'LOADING' });
     fl.content.get('new_releases', {
-        fields: ['release_image', 'release_cover', 'release_title', 'release_artist', 'release_date', 'label', 'genre', 'album'],
+        fields: ['release_image', 'release_cover', 'release_title', 'release_artist', 'release_date', 'label', 'genre', 'album_link'],
         populate: ['release_image', 'release_cover']
     }).then((snapshot) => {
         if(!snapshot) {
@@ -525,21 +525,19 @@ export const fetchAllProjects = (lang) => {
                 article.article_header_image = '';
             }
             article.article_created = new Date(article.article_created).toUTCString();
-            fs.collection('articles').doc('' + article.id).collection('locale').doc(lang).set(article).then(() => {console.log('All project articles have been fetched in ' + lang)});;
+            fs.collection('articles').doc('' + article.id).collection('locale').doc(lang).set(article).then(() => {console.log('All project articles have been fetched in ' + lang)});
             article.article_created = new Date(article.article_created);
             articles.push(article)
         });
     });
 };
 
-export const fetchNewRelease = () => dispatch => {
-    dispatch({ type: 'FETCH_RELEASE', payload: 'LOADING' });
+export const fetchNewRelease = () => {
     fl.content.get('new_releases', {
-        fields: ['release_image', 'release_cover', 'release_title', 'release_artist', 'release_date', 'label', 'genre', 'album'],
+        fields: ['release_image', 'release_cover', 'release_title', 'release_artist', 'release_date', 'label', 'genre', 'album', 'album_link'],
         populate: ['release_image', 'release_cover']
     }).then((snapshot) => {
         if(!snapshot) {
-            dispatch({type: 'FETCH_RELEASE', payload: snapshot});
             return;
         }
         let release = snapshot;
@@ -553,6 +551,6 @@ export const fetchNewRelease = () => dispatch => {
         } else {
             release.release_cover = '';
         }
-        fs.collection('release').doc('release').set(release);
+        fs.collection('release').doc('release').set(release).then(() => {console.log('New release been fetched')});
     });
 };
