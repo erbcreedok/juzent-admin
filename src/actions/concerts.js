@@ -15,6 +15,7 @@ export const getTopConcerts = (lang) => dispatch => {
             'concert_max_cost',
             'concert_sale_link',
             'order',
+            'published',
             'concert_image_bckp'
         ],
         populate: [
@@ -24,6 +25,7 @@ export const getTopConcerts = (lang) => dispatch => {
         let concerts = [];
         Object.keys(snapshot).sort((a,b) => snapshot[a].order - snapshot[b].order).map((key) => {
             let concert = snapshot[key];
+            if(!concert.published) return;
             concert.concert_title = concert['concert_title_' + lang];
             concert.concert_location = concert['concert_location_' + lang];
             if (concert.concert_image[0].url) {
@@ -56,6 +58,7 @@ export const fetchTopConcerts = (lang) => {
             'concert_max_cost',
             'concert_sale_link',
             'order',
+            'published',
             'concert_image_bckp'
         ],
         populate: [
@@ -65,6 +68,7 @@ export const fetchTopConcerts = (lang) => {
         let concerts = [];
         Object.keys(snapshot).sort((a,b) => snapshot[a].order - snapshot[b].order).map((key) => {
             let concert = snapshot[key];
+            if(!concert.published) return;
             concert.concert_title = concert['concert_title_' + lang];
             concert.concert_location = concert['concert_location_' + lang];
             if (concert.concert_image[0].url) {

@@ -70,7 +70,7 @@ class LanguageButton extends Component {
         const getButtons = () => {
             const mainLang = this.state.languages.find(lang => lang.code === this.props.lang);
             let i = 0;
-            let r = [<Button key={i} className="round-button round-button-red" onClick={() => {this.props.setLanguage(mainLang.code)}}>{mainLang.short}</Button>];
+            let r = [<Button key={i} className="round-button round-button-red" onClick={() => {this.props.setLanguage(mainLang.code); this.toggleOpen()}}>{mainLang.short}</Button>];
             this.state.languages.map((lang) => {
                 if (lang === mainLang) return;
                 i++;

@@ -10,6 +10,15 @@ const config = {
     messagingSenderId: "340489669375",
 };
 
+const configProd = {
+    apiKey: "AIzaSyBdNKvHtBoE9Uu4hLks8Gj1fubWfoAOL8E",
+    authDomain: "juzent-production.firebaseapp.com",
+    databaseURL: "https://juzent-production.firebaseio.com",
+    projectId: "juzent-production",
+    storageBucket: "juzent-production.appspot.com",
+    messagingSenderId: "206939895217"
+};
+
 const fsSettings = {
     timestampsInSnapshots: true
 };
